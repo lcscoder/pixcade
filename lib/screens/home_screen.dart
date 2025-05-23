@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'console_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text(
           'PIXCADE',
           style: TextStyle(
-            fontFamily: 'PressStart2P', // Use uma fonte arcade se quiser
+            fontFamily: 'PressStart2P', // Optional arcade-style font
             letterSpacing: 2,
           ),
         ),
@@ -24,18 +25,18 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                // TODO: abrir seletor de arquivos para ROMs
+                // TODO: implement ROM picker
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purpleAccent,
                 padding: const EdgeInsets.all(16),
                 textStyle: const TextStyle(fontSize: 18),
               ),
-              child: const Text('ADICIONAR ROMs'),
+              child: const Text('ADD ROMs'),
             ),
             const SizedBox(height: 30),
             const Text(
-              'Consoles disponíveis:',
+              'Available Consoles:',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 15),
@@ -72,7 +73,12 @@ class ConsoleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Navegar para lista de jogos desse console
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ConsoleScreen(console: name),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -85,7 +91,10 @@ class ConsoleCard extends StatelessWidget {
           children: [
             Image.asset(iconPath, height: 50),
             const SizedBox(height: 10),
-            Text(name, style: const TextStyle(fontSize: 14)),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 14),
+            ),
           ],
         ),
       ),
